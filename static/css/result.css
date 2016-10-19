@@ -1,0 +1,14 @@
+body,html{
+	width: 100%;
+	text-align: center;
+}
+.container{
+	display: inline-block;
+	text-align: center;
+	background-color: #ddd;
+	margin:3% auto;
+	padding:5px;
+}
+.left{
+	margin-bottom:25px;
+}

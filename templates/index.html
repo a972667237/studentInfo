@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>查询</title>
+	<link rel="stylesheet" href="/static/css/index.css">
+	<link rel="stylesheet" href="/static/css/reset.css">
+</head>
+<body>
+	<div class='form_container'>
+	<form action="#" method="post" class='search_form'>
+        {% csrf_token %}
+		<select name="choice" class="search_select">
+			<option value="1">姓名</option>
+			<option value="2">学号</option>
+		</select>
+		<input type="text" class="search_input" name="value">
+		<button type="submit" class='search_submit' >提交</button>
+	</form>
+	</div>
+</body>
+</html>
