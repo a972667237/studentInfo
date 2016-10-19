@@ -12,7 +12,7 @@ pip install -r requirements.txt
 
 再运行爬虫。。。
 ```
-python findStudent.py
+python showInfo/findStudent.py
 ```
 
 之后运行django
