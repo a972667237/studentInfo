@@ -82,11 +82,11 @@ class course(View):
 
 def translateDay(day):
     return {
-        '周一': 1,
-        '周二': 2,
-        '周三': 3,
-        '周四': 4,
-        '周五': 5
+        u'周一': 1,
+        u'周二': 2,
+        u'周三': 3,
+        u'周四': 4,
+        u'周五': 5
     }[day]
 
 def translateTime(time):
