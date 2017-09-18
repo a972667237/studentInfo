@@ -31,6 +31,7 @@ class course(View):
                course_time: []
                course_place: []
             '''
+            print (len(studentcourse))
             for c in studentcourse:
                 course_name = c.course.course_name
                 t = c.course.time.split(";")
