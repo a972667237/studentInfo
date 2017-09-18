@@ -23,6 +23,7 @@ class course(View):
         stu_no = requests.GET.get('stu_no')
         try:
             s = Student.objects.filter(stu_no=stu_no)[0]
+            print (s.name)
             course = []
             studentcourse = StudentCourse.objects.filter(student=s)
             '''
