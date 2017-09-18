@@ -23,7 +23,6 @@ class course(View):
         stu_no = requests.GET.get('stu_no')
         try:
             s = Student.objects.filter(stu_no=stu_no)[0]
-            print (s.name)
             course = []
             studentcourse = StudentCourse.objects.filter(student=s)
             '''
@@ -32,7 +31,6 @@ class course(View):
                course_time: []
                course_place: []
             '''
-            print (len(studentcourse))
             for c in studentcourse:
                 course_name = c.course.course_name
                 t = c.course.time.split(";")
@@ -40,18 +38,17 @@ class course(View):
                 course_time = []
                 course_place = []
                 for index in range(len(t)):
-                    print (t[index], p[index])
                     limit = t[index][0]
                     if t[index] == ".":
                         continue
-                    if p[index] == "实验（学院自行安排实验室）":
-                        p[index] = "实验室"
-                    if limit == "单":
+                    if p[index] == u"实验（学院自行安排实验室）":
+                        p[index] = u"实验室"
+                    if limit == u"单":
                         day = translateDay(t[index][1:3])
                         time = translateTime(t[index][3:])
                         course_time.append(str(day)+"_"+str(time)+"_"+"1")
                         course_place.append(p[index])
-                    elif limit == "双":
+                    elif limit == u"双":
                         day = translateDay(t[index][1:3])
                         time = translateTime(t[index][3:])
                         course_time.append(str(day) + "_" + str(time) + "_" + "2")
