@@ -38,6 +38,7 @@ class course(View):
                 course_time = []
                 course_place = []
                 for index in range(len(t)):
+                    print (t[index], p[index])
                     limit = t[index][0]
                     if t[index] == ".":
                         continue
