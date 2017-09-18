@@ -65,7 +65,8 @@ class course(View):
                     'course_time': course_time,
                     'course_place': course_place
                 })
-        except:
+        except (Exception):
+            print (Exception)
             data = {
                 'status': 'error',
                 'stu_name': 'null',
