@@ -10,3 +10,15 @@ class Student(models.Model):
     className = models.CharField(max_length=100)
     def __unicode__(self):
         return self.name
+
+
+class Course(models.Model):
+    course_id = models.CharField(max_length=20)
+    course_name = models.CharField(max_length=50)
+    time = models.CharField(max_length=50)
+    place = models.CharField(max_length=100)
+    teacher = models.CharField(max_length=10)
+
+class StudentCourse(models.Model):
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
