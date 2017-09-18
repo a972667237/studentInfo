@@ -21,57 +21,57 @@ class index(View):
 class course(View):
     def get(self, requests):
         stu_no = requests.GET.get('stu_no')
-        # try:
-        s = Student.objects.filter(stu_no=stu_no)[0]
-        course = []
-        studentcourse = StudentCourse.objects.filter(student=s)
-        '''
-            course:
-               course_name: xxxx
-               course_time: []
-               course_place: []
-        '''
-        for c in studentcourse:
-            course_name = c.course.course_name
-            t = c.course.time.split(";")
-            p = c.course.place.split(";")
-            course_time = []
-            course_place = []
-            for index in range(len(t)):
-                limit = t[index][0]
-                if t[index] == ".":
-                    continue
-                if p[index] == u"实验（学院自行安排实验室）":
-                    p[index] = u"实验室"
-                if limit == u"单":
-                    day = translateDay(t[index][1:3])
-                    time = translateTime(t[index][3:])
-                    course_time.append(str(day)+"_"+str(time)+"_"+"1")
-                    course_place.append(p[index])
-                elif limit == u"双":
-                    day = translateDay(t[index][1:3])
-                    time = translateTime(t[index][3:])
-                    course_time.append(str(day) + "_" + str(time) + "_" + "2")
-                    course_place.append(p[index])
-                else:
-                    day = translateDay(t[index][0:2])
-                    time = translateTime(t[index][2:])
-                    course_time.append(str(day) + "_" + str(time) + "_" + "1")
-                    course_place.append(p[index])
-                    course_time.append(str(day) + "_" + str(time) + "_" + "2")
-                    course_place.append(p[index])
-            course.append({
-                'course_name': course_name,
-                'course_time': course_time,
-                'course_place': course_place
-            })
-        # except (Exception):
-        #     data = {
-        #         'status': 'error',
-        #         'stu_name': 'null',
-        #         'course': []
-        #     }
-        #     return HttpResponse(json.dumps(data), content_type="application/json")
+        try:
+            s = Student.objects.filter(stu_no=stu_no)[0]
+            course = []
+            studentcourse = StudentCourse.objects.filter(student=s)
+            '''
+                course:
+                   course_name: xxxx
+                   course_time: []
+                   course_place: []
+            '''
+            for c in studentcourse:
+                course_name = c.course.course_name
+                t = c.course.time.split(";")
+                p = c.course.place.split(";")
+                course_time = []
+                course_place = []
+                for index in range(len(t)):
+                    limit = t[index][0]
+                    if t[index] == ".":
+                        continue
+                    if p[index] == u"实验（学院自行安排实验室）":
+                        p[index] = u"实验室"
+                    if limit == u"单":
+                        day = translateDay(t[index][1:3])
+                        time = translateTime(t[index][3:])
+                        course_time.append(str(day)+"_"+str(time)+"_"+"1")
+                        course_place.append(p[index])
+                    elif limit == u"双":
+                        day = translateDay(t[index][1:3])
+                        time = translateTime(t[index][3:])
+                        course_time.append(str(day) + "_" + str(time) + "_" + "2")
+                        course_place.append(p[index])
+                    else:
+                        day = translateDay(t[index][0:2])
+                        time = translateTime(t[index][2:])
+                        course_time.append(str(day) + "_" + str(time) + "_" + "1")
+                        course_place.append(p[index])
+                        course_time.append(str(day) + "_" + str(time) + "_" + "2")
+                        course_place.append(p[index])
+                course.append({
+                    'course_name': course_name,
+                    'course_time': course_time,
+                    'course_place': course_place
+                })
+        except (Exception):
+            data = {
+                'status': 'error',
+                'stu_name': 'null',
+                'course': []
+            }
+            return HttpResponse(json.dumps(data), content_type="application/json")
         data = {
             'status': 'success',
             'stu_name': s.name,
