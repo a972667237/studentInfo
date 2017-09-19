@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.views.generic import View
 from showInfo.models import Student, Course, StudentCourse
 from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 import json
 # Create your views here.
 class index(View):
@@ -79,6 +80,39 @@ class course(View):
         }
         return HttpResponse(json.dumps(data), content_type="application/json")
 
+@csrf_exempt
+def student_interface(request):
+    if request.method == "POST":
+        choice = request.POST.get('choice')
+        value = request.POST.get('value')
+        if (choice == '1'):
+            result = Student.objects.filter(name=value)
+            s = [{'stu_no': i.stu_no, 'stu_name': i.name, 'gender': i.gender, 'collega': i.collega, 'profess': i.profess, 'class': i.className} for i in result]
+            status = 'success'
+            if len(s) == 0:
+                status = 'empty'
+            data = {
+                'status': status,
+                'count': len(s),
+                'student': s
+            }
+            return HttpResponse(json.dumps(data), content_type="application/json")
+        else:
+            result = Student.objects.filter(stu_no=value)
+            s = [
+                {'stu_no': i.stu_no, 'stu_name': i.name, 'gender': i.gender, 'collega': i.collega, 'profess': i.profess,
+                 'class': i.className} for i in result]
+            status = 'success'
+            if len(s) == 0:
+                status = 'empty'
+            data = {
+                'status': status,
+                'count': len(s),
+                'student': s
+            }
+            return HttpResponse(json.dumps(data), content_type="application/json")
+    else:
+        return HttpResponse("emmmm")
 
 def translateDay(day):
     return {

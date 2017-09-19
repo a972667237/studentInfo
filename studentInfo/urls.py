@@ -21,4 +21,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$',showInfo_views.index.as_view(),name = 'index'),
     url(r'^course/', showInfo_views.course.as_view(), name='course'),
+    url(r'^api', showInfo_views.student_interface, name='api')
 ]
